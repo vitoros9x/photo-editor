@@ -82,7 +82,6 @@ function App() {
   const selectedOption = options[selectedOptionIndex]
 
   function handleSliderChange(e) {
-    console.log(e);
    setOptions(prevOptions => {
      return prevOptions.map((option, index) => {
        if (index !== selectedOptionIndex) return option
@@ -91,9 +90,17 @@ function App() {
    }) 
   }
 
+  function getImageStyle() {
+    const filter = options.map(option => {
+      return `${option.property}(${option.value}${option.unit})`
+    })
+
+    return {filter: filter.join(' ')}
+  }
+
   return (
     <div className="container">
-      <div className="main-image">Image</div>
+      <div className="main-image" style={getImageStyle()}></div>
       <div className="sidebar">
         {options.map((option, index) => {
           return (
